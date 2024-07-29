@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1722241479071",
+    "name": "chaussette",
+    "code": "123",
+    "description": "C'est une chaussette bleue à pois verts",
+    "image": "",
+    "price": "5",
+    "quantity": "1"
+  },
+  {
+    "id": "1722243089347",
+    "name": "Sapin de Noël",
+    "code": "2512",
+    "description": "Un sapin, tout ce qu'il y a de plus Noël",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Juletr%C3%A6et.jpg",
+    "price": "1500",
+    "quantity": "3"
+  }
+]

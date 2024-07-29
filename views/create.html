@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>Create Article</title>
+</head>
+<body>
+  <h1>Create Article</h1>
+  <form action="/articles/create" method="post">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="code" placeholder="Code" required>
+    <textarea name="description" placeholder="Description" required></textarea>
+<!-- add upload image to the form -->
+    <input type="text" name="image" placeholder="Image URL" required>
+    <input type="number" name="price" placeholder="Price" required>
+    <input type="number" name="quantity" placeholder="Quantity" required>
+    <button type="submit">Create</button>
+    <button onclick="window.location.href = '/index.html';">Return to Index</button>
+  </form>
+</body>
+</html>
