@@ -10,10 +10,40 @@ const readJsonFile = () => {
     return JSON.parse(fs.readFileSync(articlesPath, 'utf-8'));
   };
 
+// GET all articles in JSON format from the datafile
+router.get('/data', (req, res) => {
+    try {
+        const articles = readJsonFile();
+        console.log('Sending articles data:', articles);
+        res.json(articles);
+    } catch (error) {
+        console.error('Error reading articles data:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+
+// GET a single article by id in JSON format from the datafile
+router.get('/:id/data', (req, res) => {
+    try {
+        const articles = readJsonFile();
+        const article = articles.find(a => a.id === req.params.id);
+        if (!article) {
+            console.log(`Article with id ${req.params.id} not found`);
+            return res.status(404).json({ error: 'Article not found' });
+        }
+        console.log(`Sending article data for id ${req.params.id}:`, article);
+        res.json(article);
+    } catch (error) {
+        console.error('Error reading article data:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 //route to create a new article
 router.get('/create', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/create.html'));
-});
+    res.sendFile(path.join(__dirname, '../views/create.html'));
+  });
 
 // route to view a single article by id
 router.get('/:id', (req, res) => {
@@ -21,7 +51,7 @@ router.get('/:id', (req, res) => {
 });
 
 // route to view all articles
-router.get('/view', (req, res) => {
+router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/articles.html'));
     });
 
@@ -34,24 +64,5 @@ router.post('/create', (req, res) => {
   fs.writeFileSync(articlesPath, JSON.stringify(articles, null, 2));
   res.redirect('/articles');
 });
-
-// GET all articles in JSON format from the datafile
-router.get('/', (req, res) => {
-    const articles = readJsonFile();
-    res.json(articles);
-  });
-
-// GET a single article by id in JSON format from the datafile
-router.get('/:id/data', (req, res) => {
-    const articles = readJsonFile();
-    const article = articles.find(a => a.id === req.params.id);
-    if (!article) {
-        return res.status(404).send('Article not found');
-    }
-    else {
-        res.json(article);
-    }
-});
-
 
 module.exports = router;

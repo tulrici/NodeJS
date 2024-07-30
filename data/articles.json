@@ -16,5 +16,14 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Juletr%C3%A6et.jpg",
     "price": "1500",
     "quantity": "3"
+  },
+  {
+    "id": "1722346098738",
+    "name": "Eiffel Tower",
+    "code": "101",
+    "description": "La tour Eiffel",
+    "image": "https://i.natgeofe.com/k/c41b4f59-181c-4747-ad20-ef69987c8d59/eiffel-tower-night_2x3.jpg",
+    "price": "9999999999",
+    "quantity": "1"
   }
 ]
