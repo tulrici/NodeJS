@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// loadALlArticles function
 function loadAllArticles() {
   console.log('Fetching articles...');
 
@@ -54,6 +55,7 @@ function loadAllArticles() {
       });
 }
 
+// loadSingleArticle function
 function loadSingleArticle() {
   const articleId = window.location.pathname.split('/').pop();
   console.log(`Loading article with ID: ${articleId}`);
@@ -89,14 +91,11 @@ function loadSingleArticle() {
       });
 }
 
+// createArticleCard function
 function createArticleCard(article) {
   const articleCard = document.createElement('div');
   articleCard.classList.add('article-card');
 
-  const articleImage = document.createElement('img');
-  articleImage.classList.add('article-image');
-  articleImage.src = article.image || '/api/placeholder/200/200';
-  articleImage.alt = article.name;
 
   const articleTitle = document.createElement('h2');
   articleTitle.classList.add('article-title');
@@ -118,6 +117,14 @@ function createArticleCard(article) {
   articleLink.classList.add('article-link');
   articleLink.href = `/articles/${article.id}`;
   articleLink.textContent = 'View article';
+
+  const articleImage = document.createElement('img');
+  articleImage.classList.add('article-image');
+  articleImage.src = article.image || '/api/placeholder/200/200';
+  articleImage.alt = article.name;
+
+  // add link to detail to the image
+  articleLink.appendChild(articleImage);
 
   articleCard.appendChild(articleImage);
   articleCard.appendChild(articleTitle);
