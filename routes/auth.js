@@ -5,12 +5,23 @@ const router = express.Router();
 
 const usersPath = path.join(__dirname, '../data/users.json');
 
+// route to login
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/login.html'));
 });
 
+// route to register
 router.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/register.html'));
+});
+
+// route to welcome
+router.get('/welcome', (req, res) => {
+  if (req.session.username) {
+    res.sendFile(path.join(__dirname, '../views/welcome.html'));
+  } else {
+    res.redirect('/auth/login');
+  }
 });
 
 // register new user

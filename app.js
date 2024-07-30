@@ -1,3 +1,4 @@
+// init project
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -20,14 +21,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
 
+// routes
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/articles', articlesRouter);
 
+// home route
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
+// start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

@@ -1,41 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const articlesList = document.getElementById('articles-list');
-    const articleName = document.getElementById('article-name');
-    const articleDescription = document.getElementById('article-description');
-    const articleImage = document.getElementById('article-image');
-    const articlePrice = document.getElementById('article-price');
-    const articleQuantity = document.getElementById('article-quantity');
-  
-    console.log('Fetching articles...');
-    
-    if (articlesList) {
 
-      fetch('/articles')
-        .then(response => response.json())
-        .then(articles => {
-          articlesList.innerHTML = articles.map(article => `
-          <div class="article-card">
-            <img src="${article.image}" alt="${article.name}" class="article-image">
-            <h2 class="article-title">${article.name}</h2>
-            <p class="article-description">${article.description}</p>
-            <p class="article-price">Price: $${article.price}</p>
-            <p class="article-quantity">Quantity: ${article.quantity}</p>
-            <a href="/articles/${article.id}" class="article-link">View Details</a>
-          </div>
-          `).join('');
-        });
-    }
-  const articleId = window.location.pathname.split('/').pop();
-  if (articleId && articleName && articleDescription && articleImage && articlePrice && articleQuantity) {
-    fetch(`/articles/${articleId}`)
-      .then(response => response.json())
-      .then(article => {
-        articleName.innerText = article.name;
-        articleDescription.innerText = article.description;
-        articleImage.src = article.image;
-        articlePrice.innerText = `Price: $${article.price}`;
-        articleQuantity.innerText = `Quantity: ${article.quantity}`;
-      });
-    }
-  });
-  
+    console.log('Fetching articles...');
+
+    // Fetch all articles
+  fetch('/articles')
+  .then((res) => res.json())
+  .then(data => {
+    const articlesList = document.getElementById('articles-list');
+    data.forEach(article => {
+      const articleCard = document.createElement('div');
+      articleCard.classList.add('article-card');
+
+      const articleImage = document.createElement('img');
+      articleImage.classList.add('article-image');
+      articleImage.src = article.image;
+      articleImage.alt = article.name;
+
+      const articleTitle = document.createElement('h2');
+      articleTitle.classList.add('article-title');
+      articleTitle.textContent = article.name;
+
+      const articleDescription = document.createElement('p');
+      articleDescription.classList.add('article-description');
+      articleDescription.textContent = article.description;
+
+      const articlePrice = document.createElement('p');
+      articlePrice.classList.add('article-price');
+      articlePrice.textContent = `Price: ${article.price}€`;
+
+      const articleQuantity = document.createElement('p');
+      articleQuantity.classList.add('article-quantity');
+      articleQuantity.textContent = `Quantity: ${article.quantity}`;
+
+      const articleLink = document.createElement('a');
+      articleLink.classList.add('article-link');
+      articleLink.href = `/articles/${article.id}`;
+      articleLink.textContent = 'View article';
+
+      articleCard.appendChild(articleImage);
+      articleCard.appendChild(articleTitle);
+      articleCard.appendChild(articleDescription);
+      articleCard.appendChild(articlePrice);
+      articleCard.appendChild(articleQuantity);
+      articleCard.appendChild(articleLink);
+
+      articlesList.appendChild(articleCard);
+
+    });
+
+});
+});
