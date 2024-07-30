@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const fs = require('fs');
+
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const articlesRouter = require('./routes/articles');
@@ -25,11 +26,6 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/articles', articlesRouter);
-
-// home route
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/index.html'));
-});
 
 // start server
 app.listen(port, () => {

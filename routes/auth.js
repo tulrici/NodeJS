@@ -51,4 +51,12 @@ router.post('/login', (req, res) => {
   }
 });
 
+// logout user
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/auth/login');
+
+    
+});
+
 module.exports = router;
