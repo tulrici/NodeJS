@@ -13,7 +13,7 @@ router.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/register.html'));
 });
 
-// register user
+// register new user
 router.post('/register', (req, res) => {
   const { username, password } = req.body;
   const users = JSON.parse(fs.readFileSync(usersPath, 'utf-8'));
